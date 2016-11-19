@@ -1,23 +1,33 @@
 
 function register(){
-	var set1,set2,set3;
+	var set1,set2,set3,set4;
 	
 	var query = document.getElementById("query").value;
 
 	if(document.getElementById("music").checked == true)
-		set1='mp3';
+		set1='mp3|wav|m4a|ogg|wma|flac';
 	else
 		set1='';
 	if(document.getElementById("video").checked == true)
-		var set2='|mkv|mp4|avi';
+		var set2='|mkv|mp4|avi|webm|flv|mov|mpg|mpeg';
 	else
 		set2='';
    	if(document.getElementById("books").checked == true)
 		var set3='|epub|pdf';
 	else
 		set3='';
+	if(document.getElementById("software").checked == true)
+		var set3='|exe|dmg|msi|apk|ipa';
+	else
+		set3='';
 
-	window.open("http://www.google.com/webhp?#q="+query+" -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" ("+set1+set2+set3+")&btnI=I");
+	var formats = set1 + set2 + set3 + set4;
+	var query_split = query.split(".");
+	var suggested_format = query_split[1];
+	query = query_split[0];
+	formats = formats + '|' + suggested_format;
+
+	window.open("http://www.google.com/webhp?#q="+query+" -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" ("+formats+")&btnI=I");
 }
 
 document.addEventListener('DOMContentLoaded', function () {document.querySelector('button').addEventListener('click', register); });
